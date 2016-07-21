@@ -146,9 +146,8 @@ class Jprocess:
 def check_java_version():
 	""" Check JVM version in order to get the proper stats """
 # Exec java -version
-	jd = subprocess.check_output(["java", "-version"],
-		stderr=subprocess.STDOUT)
-
+	#jd = subprocess.check_output(["java", "-version"],stderr=subprocess.STDOUT)
+        jd = subprocess.Popen(["java", "-version"], stderr=subprocess.PIPE).communicate()[1]
 	match = re.search('version \"\d\.(\d)\.', jd)
 
 	java_version = match.group(1)
